@@ -4,14 +4,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import BottomTabNavigator from './Navigation/TabNavigator';
 import Welcome from './Screens/Welcome';
 
-const App3 = () => {
-  const [splash, setSplash] = useState(true);
+const App3 = (): JSX.Element => {
+  const [splash, setSplash] = useState<boolean>(true);
 
-  useEffect(() => {
+  useEffect((): () => void => {
     // 2秒展示啟動畫面
-    setTimeout(() => {
+    const startSplash = setTimeout((): void => {
       setSplash(false);
     }, 2200);
+
+    return (): void => {
+      clearTimeout(startSplash);
+    };
   }, []);
 
   return splash ? (

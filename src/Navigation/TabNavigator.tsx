@@ -11,13 +11,22 @@ import {
   MemberStackNavigator,
 } from './StackNavigator';
 
-const Tab = createBottomTabNavigator();
+type TabParamList = {
+  Home: { title: string };
+  News: { title: string };
+  Category: { title: string };
+  Video: { title: string };
+  Mall: { title: string };
+  Member: { title: string };
+};
 
-const BottomTabNavigator = () => {
+const Tab = createBottomTabNavigator<TabParamList>();
+
+const BottomTabNavigator = (): JSX.Element => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({focused, color, size}): React.ReactNode | undefined => {
           let iconName: string = '';
 
           if (route.name === 'Home') {

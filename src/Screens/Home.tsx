@@ -2,7 +2,6 @@ import React, {useRef, useState, useEffect} from 'react';
 import {
   StatusBar,
   SafeAreaView,
-  StyleSheet,
   Text,
   ActivityIndicator,
   Image,
@@ -19,15 +18,15 @@ import { colors } from '../styles/base';
 import { safeAreaView } from '../styles/models/safeAreaView';
 import { headerStyle } from '../styles/models/header';
 
-const Home2 = ({navigation, route}) => {
-  let [isLoading, setIsLoading] = useState(false);
-  let [carouselData, setCarouselData] = useState([]);
-  let [popularData, setPopularData] = useState([]);
+const Home2 = ({navigation/*, route*/}: any): JSX.Element => {
+  let [isLoading, setIsLoading] = useState<boolean>(false);
+  let [carouselData, setCarouselData] = useState<[]>([]);
+  let [popularData, setPopularData] = useState<[]>([]);
 
-  const [headerShown, setHeaderShown] = useState(false);
-  const translation = useRef(new Animated.Value(-45)).current;
+  const [headerShown, setHeaderShown] = useState<boolean>(false);
+  const translation: Animated.Value = useRef(new Animated.Value(-45)).current;
 
-  useEffect(() => {
+  useEffect((): void => {
     console.log('Home navigation: ', navigation);
     // console.log('route: ', route);
     if (popularData.length <= 0) {
@@ -41,7 +40,7 @@ const Home2 = ({navigation, route}) => {
     }).start();
   }, [headerShown]);
 
-  const getCategories = async () => {
+  const getCategories = async (): Promise<void> => {
     try {
       setIsLoading((isLoading = true));
       const res = await axios.get('https://api.ctwant.com/api/v1/home');
@@ -63,36 +62,36 @@ const Home2 = ({navigation, route}) => {
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={safeAreaView.top} />
       <Animated.View
-        // style={[
-        //   headerStyle.main,
-        //   {
-        //     position: 'absolute',
-        //     top: 45,
-        //     left: 0,
-        //     right: 0,
-        //     zIndex: 1,
-        //     transform: [
-        //       { translateY: translation },
-        //     ],
-        //   },
-        // ]}
-        style={{
-          width: '100%',
-          backgroundColor: colors.primary,
-          paddingBottom: 5,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          position: 'absolute',
-          top: 45,
-          left: 0,
-          right: 0,
-          zIndex: 1,
-          transform: [
-            { translateY: translation },
-          ],
-        }}
+        style={[
+          headerStyle.main,
+          {
+            position: 'absolute',
+            top: 45,
+            left: 0,
+            right: 0,
+            zIndex: 1,
+            transform: [
+              { translateY: translation },
+            ],
+          },
+        ]}
+        // style={{
+        //   width: '100%',
+        //   backgroundColor: colors.primary,
+        //   paddingBottom: 5,
+        //   display: 'flex',
+        //   flexDirection: 'row',
+        //   justifyContent: 'space-between',
+        //   alignItems: 'center',
+        //   position: 'absolute',
+        //   top: 45,
+        //   left: 0,
+        //   right: 0,
+        //   zIndex: 1,
+        //   transform: [
+        //     { translateY: translation },
+        //   ],
+        // }}
       >
         <Image
           resizeMode="contain"
@@ -108,7 +107,7 @@ const Home2 = ({navigation, route}) => {
       {isLoading === true ? (
         <ActivityIndicator
           size={24}
-          style={Style.activityIndicator}
+          style={{paddingVertical: 30}}
           color={colors.primary}
         />
       ) : (
@@ -181,28 +180,5 @@ class Home extends Component {
   }
 }
 */
-
-const Style = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-  },
-  tabBar: {
-    backgroundColor: '#ffffff',
-    paddingBottom: 6,
-  },
-  container: {
-    flex: 1,
-  },
-  activityIndicator: {
-    paddingVertical: 30,
-  },
-  colorGrey: {
-    color: 'grey',
-  },
-  colorBlack: {
-    color: '#000000',
-  },
-});
 
 export default Home2;

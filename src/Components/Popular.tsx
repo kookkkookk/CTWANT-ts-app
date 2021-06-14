@@ -4,7 +4,14 @@ import AnimatedFadeInView from './AnimatedFadeInView';
 
 import { articleList } from '../styles/models/articleList';
 
-const Popular = ({navigation, popularData}) => {
+interface IArticle {
+  article_id: number;
+  cover: any;
+  title: string;
+  publish_at: string;
+}
+
+const Popular = ({navigation, popularData}: any): JSX.Element => {
   return (
     <View style={articleList.main}>
       <View style={articleList.titleBox}>
@@ -15,7 +22,7 @@ const Popular = ({navigation, popularData}) => {
         </View>
       </View>
       <View style={articleList.contentBox}>
-        {popularData.map((article, artIdx) => (
+        {popularData.map((article: IArticle, artIdx: number) => (
           <TouchableOpacity
             key={article.article_id}
             onPress={() => navigation.navigate('Article', {
@@ -33,7 +40,7 @@ const Popular = ({navigation, popularData}) => {
                   style={artIdx === 0 ? articleList.contentImg : articleList.contentImgRow}
                   source={{uri: article.cover.md}}
                 />
-                <View style={artIdx !== 0 ? articleList.contentInfo : ''}>
+                <View style={artIdx !== 0 ? articleList.contentInfo : null}>
                   <Text
                     numberOfLines={3}
                     style={

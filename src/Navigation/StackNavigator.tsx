@@ -8,9 +8,19 @@ import Categories from '../Screens/Categories';
 import Mall from '../Screens/Mall';
 import Article from '../Screens/Article';
 
-const Stack = createStackNavigator();
+type StackParamList = {
+  Home: { headerShown: boolean, title: string } | undefined;
+  News: { headerShown: boolean, title: string } | undefined;
+  Categories: { headerShown: boolean, title: string } | undefined;
+  Mall: { headerShown: boolean, title: string } | undefined;
+  Videos: { headerShown: boolean, title: string } | undefined;
+  Member: { headerShown: boolean, title: string } | undefined;
+  Article: undefined
+};
 
-const MainStackNavigator = () => {
+const Stack = createStackNavigator<StackParamList>();
+
+const MainStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -26,7 +36,7 @@ const MainStackNavigator = () => {
   );
 };
 
-const NewsStackNavigator = () => {
+const NewsStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -42,7 +52,7 @@ const NewsStackNavigator = () => {
   );
 };
 
-const CategoriesStackNavigator = () => {
+const CategoriesStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -58,7 +68,7 @@ const CategoriesStackNavigator = () => {
   );
 };
 
-const MallStackNavigator = () => {
+const MallStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -73,14 +83,15 @@ const MallStackNavigator = () => {
   );
 };
 
-function Videos({navigation}) {
+// function Videos({navigation}) {
+function Videos(): JSX.Element {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>影音</Text>
     </View>
   );
 }
-function Member({navigation}) {
+function Member(): JSX.Element {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>會員中心</Text>
@@ -88,7 +99,7 @@ function Member({navigation}) {
   );
 }
 
-const VideosStackNavigator = () => {
+const VideosStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -103,7 +114,7 @@ const VideosStackNavigator = () => {
   );
 };
 
-const MemberStackNavigator = () => {
+const MemberStackNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator>
       <Stack.Screen
